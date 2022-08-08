@@ -3,23 +3,54 @@ import logo from './logo.svg';
 import './App.css';
 import Nav from './views/Nav';
 const App = () => {
-  let [name, setName] = useState('Phonghihi') // name la bien, setName la ham khi name thay doi
+  let [name, setName] = useState('Phonghihi')
+  // name la bien, setName la ham khi name thay doi
+  const [address, setAddress] = useState('');
+  const [todos, setTodos] = useState([
+    { id: "todo1", title: "Watching video games" },
+    { id: "todo2", title: "Sleep" }
+
+  ]);
+
   const handleClick = (event) => {
-    setName('Hoi dan it'); // setname là bất đồng bộ
-    console.log(">>> clicl me", name)
+    // setName('Hoi dan it'); // setname là bất đồng bộ
+    // console.log(">>> clicl me", name)
+    // hook not merge state
+    if (!address) {
+      alert('empty input')
+      return;
+    }
+    let newTodo = { id: ' ', title: address }
+    setTodos([...todos, newTodo])
+    setAddress('')
+
   }
   const handleChange = (event) => {
     // console.log(event.target.value)
-    setName(event.target.value)
+    setAddress(event.target.value)
   }
+
   return (
     <div className="App">
       <Nav></Nav>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Hello world from {name}</h1>
+        <div className='todo-container'>
+          {todos.map((item, index) => {
+            return (
+              <div className='todo-child' key={item.id}>{item.title}</div>
+
+            )
+          })
+
+          }
+          {/* <div className='todo-child'>doing homework 2</div> */}
+
+
+        </div>
         <input type="text" placeholder='Nhap ten vao day'
-          value={name}
+          value={address}
           onChange={(event) => handleChange(event)}
         />
         <button onClick={(event) => handleClick(event)}>Click me</button>

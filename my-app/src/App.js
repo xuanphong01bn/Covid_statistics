@@ -1,23 +1,27 @@
+import React, { useState } from 'react'
 import logo from './logo.svg';
 import './App.css';
 import Nav from './views/Nav';
 const App = () => {
-  let name = 'phong';
-  let obj = { name: 'Phong', Age: '21' };
-  let link = 'https://www.facebook.com/profile.php?id=100004722139213';
+  let [name, setName] = useState('Phonghihi') // name la bien, setName la ham khi name thay doi
   const handleClick = (event) => {
-    alert('hehe');
-    alert(event);
+    setName('Hoi dan it'); // setname là bất đồng bộ
+    console.log(">>> clicl me", name)
+  }
+  const handleChange = (event) => {
+    // console.log(event.target.value)
+    setName(event.target.value)
   }
   return (
     <div className="App">
       <Nav></Nav>
-      {console.log('check obj: ', obj)}
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello world from {typeof (name)} {obj.name}</h1>
-        <p style={{ color: 'red' }}>{JSON.stringify(obj)}</p>
-        <a href={link} target="_blank"> Visit Facebook</a>
+        <h1>Hello world from {name}</h1>
+        <input type="text" placeholder='Nhap ten vao day'
+          value={name}
+          onChange={(event) => handleChange(event)}
+        />
         <button onClick={(event) => handleClick(event)}>Click me</button>
       </header>
 

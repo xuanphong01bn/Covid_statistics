@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import logo from './logo.svg';
 import './App.css';
-import Nav from './views/Nav';
-import Todo from './views/Todo';
+
+import Covid from './views/Covid';
 const App = () => {
   let [name, setName] = useState('Phonghihi')
   // name la bien, setName la ham khi name thay doi
@@ -12,7 +12,9 @@ const App = () => {
     { id: "todo2", title: "Sleep" }
 
   ]);
-
+  useEffect(() => {
+    console.log('run use effect')
+  }, [address]) //= component did mout
   const handleClick = (event) => {
     // setName('Hoi dan it'); // setname là bất đồng bộ
     // console.log(">>> clicl me", name)
@@ -21,7 +23,7 @@ const App = () => {
       alert('empty input')
       return;
     }
-    let newTodo = { id: ' ', title: address }
+    let newTodo = { id: Math.floor((Math.random() * 1000) + 1), title: address }
     setTodos([...todos, newTodo])
     setAddress('')
 
@@ -30,22 +32,28 @@ const App = () => {
     // console.log(event.target.value)
     setAddress(event.target.value)
   }
+  const handleDeletehihi = (id) => {
+    let a = todos.filter(item => item.id !== id);
+    setTodos(a);
+  }
 
   return (
     <div className="App">
-      <Nav></Nav>
+
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello world from {name}</h1>
-        <Todo
+        {/* <Todo
           todos={todos}
           title='Hello props'
+          handleDelete={handleDeletehihi}
         />
         <input type="text" placeholder='Nhap ten vao day'
           value={address}
           onChange={(event) => handleChange(event)}
         />
-        <button onClick={(event) => handleClick(event)}>Click me</button>
+        <button onClick={(event) => handleClick(event)}>Click me</button> */}
+        <Covid />
+
       </header>
 
     </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import logo from './logo.svg';
 import './App.css';
 import Nav from './views/Nav';
+import Todo from './views/Todo';
 const App = () => {
   let [name, setName] = useState('Phonghihi')
   // name la bien, setName la ham khi name thay doi
@@ -36,19 +37,10 @@ const App = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Hello world from {name}</h1>
-        <div className='todo-container'>
-          {todos.map((item, index) => {
-            return (
-              <div className='todo-child' key={item.id}>{item.title}</div>
-
-            )
-          })
-
-          }
-          {/* <div className='todo-child'>doing homework 2</div> */}
-
-
-        </div>
+        <Todo
+          todos={todos}
+          title='Hello props'
+        />
         <input type="text" placeholder='Nhap ten vao day'
           value={address}
           onChange={(event) => handleChange(event)}
